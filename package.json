@@ -1,0 +1,22 @@
+{
+  "name": "fehlstunden",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "nodemon --exec ts-node src/app.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "author": "julianjauk <jaujuc18@htl-kaindorf.at>",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^8.18.0",
+    "nodemon": "^2.0.18",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
+  }
+}
