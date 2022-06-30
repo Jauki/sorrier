@@ -1,13 +1,21 @@
 {
-  "name": "fehlstunden",
+  "name": "@jauki/fehlstunden",
   "version": "1.0.0",
-  "description": "",
+  "description": "a tool to excuse your absent lessons really fast :)",
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon --exec ts-node src/app.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "bin": {
+    "@jauki/fehlstunden": "bin/sorrier",
+    "sorrier": "bin/sorrier"
+  },
+  "keywords": [
+    "cli",
+    "webunits"
+  ],
   "author": "julianjauk <jaujuc18@htl-kaindorf.at>",
   "license": "ISC",
   "devDependencies": {
@@ -17,6 +25,15 @@
     "nodemon": "^2.0.18",
     "prettier": "^2.7.1",
     "ts-node": "^10.8.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "webuntis": "file:./../WebUntis"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "arg": "^5.0.2",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "esm": "^3.2.25",
+    "inquirer": "^9.0.0"
   }
 }
