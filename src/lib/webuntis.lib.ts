@@ -1,12 +1,19 @@
-const Configstore = require('configstore');
 const inq = require('./inquirer.lib.ts');
-const pkg = require('../../package.json');
 import WebUntis from 'webuntis';
+const Configstore = require('configstore');
+const pkg = require('../../package.json');
 const conf = new Configstore(pkg.name);
 
 module.exports = {
   getClient: async () => {
-    const credentials = await inq.askCredentials();
+    let credentials = null;
+    if (conf.get().schoolname != null) {
+      // FixMe: implement a better solution
+      credentials = conf.get();
+    } else {
+      credentials = await inq.askCredentials();
+    }
+
     const client = new WebUntis(
       credentials.schoolname,
       credentials.username,
@@ -14,6 +21,14 @@ module.exports = {
       credentials.baseurl
     );
 
-    return client;
+    return [
+      client,
+      {
+        schoolname: credentials.schoolname,
+        username: credentials.username,
+        password: credentials.password,
+        baseurl: credentials.baseurl,
+      },
+    ];
   },
 };
