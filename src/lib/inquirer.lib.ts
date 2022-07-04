@@ -60,10 +60,39 @@ module.exports = {
     const question = [
       {
         name: 'pdf',
-        type: 'list',
-        message:
-          'Do you want to excuse your Absent lesson via PDF and send the PDF by yourself?',
-        choices: ['Yes', 'No (18 +)'],
+        type: 'confirm',
+        message: 'Do you want a PDF (else automatically sent to teacher)?',
+      },
+    ];
+    return inquirer.prompt(question);
+  },
+
+  askDate: () => {
+    //  Maybe Implement multiple inputs
+    const question = [
+      {
+        name: 'date',
+        type: 'input',
+        message: 'When did your Schoolyear start? (MM.DD.YYYY)',
+      },
+    ];
+
+    return inquirer.prompt(question);
+  },
+
+  askEmail: () => {
+    const question = [
+      {
+        name: 'email',
+        type: 'input',
+        message: 'Enter your Teachers email: ',
+        validate: function (value) {
+          if (value.includes('@')) {
+            return true;
+          } else {
+            return 'Please enter a valid email!';
+          }
+        },
       },
     ];
     return inquirer.prompt(question);

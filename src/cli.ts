@@ -34,7 +34,7 @@ module.exports = {
       status.stop();
       console.log(chalk.green('Logged in ✅'));
       let answer = await inquirer.askPDF();
-      if (answer) {
+      if (answer.pdf) {
         // get the date via inquirer
         downloadPDF(client);
       } else {
@@ -63,4 +63,20 @@ const downloadPDF = async (client) => {
   );
 };
 
-const sendMail = (client) => {};
+const sendMail = async (client) => {
+  // Implement NodeMailer
+  console.log(
+    chalk.blue('Please enter the email of your teacher (Press =>): ')
+  );
+  let email = await inquirer.askEmail();
+  console.log(email);
+  console.log(
+    chalk.blue('Please enter the beginning of your Schoolyear (Press =>): ')
+  );
+  let value = await inquirer.askDate();
+  let date = new Date(value.date);
+  let absences = await client
+    .getAbsentLesson(new Date(2021, 9, 13), new Date(), true)
+    .catch((e) => console.log(e));
+  // TODO: doesn't get
+};
