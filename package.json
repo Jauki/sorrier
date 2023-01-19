@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "a tool to excuse your absent lessons really fast :)",
   "main": "src/app.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon --exec ts-node src/app.ts",
+    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm src/app.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "bin": {
-    "@jauki/sorrier": "bin/sorrier",
     "sorrier": "bin/sorrier"
   },
   "keywords": [
@@ -20,11 +20,20 @@
     "access": "public"
   },
   "author": "julianjauk <jaujuc18@htl-kaindorf.at>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
+    "@types/nodemailer": "^6.4.6",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
-    "eslint": "^8.18.0",
+    "eslint": "8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-standard": "^5.0.0",
     "nodemon": "^2.0.18",
     "prettier": "^2.7.1",
     "ts-node": "^10.8.1",
@@ -42,7 +51,9 @@
     "dotenv": "^16.0.1",
     "esm": "^3.2.25",
     "figlet": "^1.5.2",
+    "html-pdf": "^3.0.1",
     "inquirer": "^8.2.1",
+    "nodemailer": "^6.8.0",
     "open": "^8.4.0"
   }
 }

@@ -1,11 +1,44 @@
-import 'dotenv/config';
-// TODO: Email client???
-// TODO: CLI??
-import { client } from './webuntis.config';
+import { createStartScreen } from './helper/ui.helper.js';
+import { getClient } from './lib/webuntis.lib.js';
+import { absentDaysFormatted } from './helper/format.helper.js';
+import { createHTMLString } from './helper/html.helper.js';
 
 /**
  * Make User login through the CLI
  * then make a call like sorrier -> he checks all the missing lessons
  * $ sorrier -f -> chooses a random excuse
- * $ sorrier -c -> lets you execuse (type Own execuses) per Day
  */
+
+createStartScreen();
+const [client, credentials] = await getClient();
+console.log('Welcome ' + credentials.username + '!');
+
+const date = new Date().setFullYear(new Date().getFullYear() - 1);
+await client.login();
+
+const days = await client.getAbsentLesson(new Date(date), new Date());
+
+console.table(absentDaysFormatted(days));
+
+console.log(createHTMLString(days));
+
+// const contentOfEmail = new EmailHelper(
+//   'jaujuc18@htl-kaindorf.at',
+//   'blamac18@htl-kaindorf.at',
+//   'Fehlstunden',
+//   'Blaui',
+//   'Julian Jauk',
+//   days
+// );
+//
+// const smtpOptions: SMTPTransport.Options = {
+//   host: 'sigadev.max.todo',
+//   port: 420,
+//   secure: false,
+//   auth: {
+//     user: 'foo - dotdenv',
+//     pass: 'foo!',
+//   },
+// };
+//
+// console.log(sendMail(smtpOptions, contentOfEmail.createEmailOptions()));
