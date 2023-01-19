@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "a tool to excuse your absent lessons really fast :)",
   "main": "src/app.js",
+  "bin": {
+    "sorrier": "./bin/app.sh"
+  },
   "type": "module",
   "scripts": {
-    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm src/app.ts",
+    "dev": "node --experimental-specifier-resolution=node --loader ts-node/esm src/app.ts",
+    "start": "node dist/src/app.js",
+    "build": "tsc",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
-  },
-  "bin": {
-    "sorrier": "bin/sorrier"
   },
   "keywords": [
     "cli",

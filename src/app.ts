@@ -1,7 +1,9 @@
+#!/usr/bin/env node
 import { createStartScreen } from './helper/ui.helper.js';
 import { getClient } from './lib/webuntis.lib.js';
-import { absentDaysFormatted } from './helper/format.helper.js';
+import pdf from 'html-pdf';
 import { createHTMLString } from './helper/html.helper.js';
+import * as fs from 'fs';
 
 /**
  * Make User login through the CLI
@@ -17,10 +19,16 @@ const date = new Date().setFullYear(new Date().getFullYear() - 1);
 await client.login();
 
 const days = await client.getAbsentLesson(new Date(date), new Date());
+const html: string = createHTMLString(days);
 
-console.table(absentDaysFormatted(days));
-
-console.log(createHTMLString(days));
+pdf.create(html, { format: 'A4' }).toBuffer((err, buffer) => {
+  if (err) return console.log(err);
+  const desktopPath = `${process.env.HOME}/Desktop/`;
+  fs.writeFile(`${desktopPath}abwesenheit_${new Date().getMonth()}.pdf`, buffer, (error) => {
+    if (error) return console.log(error);
+    console.log('PDF saved to desktop');
+  });
+});
 
 // const contentOfEmail = new EmailHelper(
 //   'jaujuc18@htl-kaindorf.at',
