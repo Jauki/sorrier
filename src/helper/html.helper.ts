@@ -19,7 +19,22 @@ export const createHTMLString = (days: Absences): string => {
   return html + body + `</table>`;
 };
 
-const getRandomAbwesenheitsgrund = () => {
-  const map = ['Krankheit', 'Krankheit', 'Arzt'];
-  return map[Math.floor(Math.random()) * map.length];
+const getRandomAbwesenheitsgrund = (): string => {
+  const map = new Map<string, number>();
+  map.set('Krankheit', 0.7);
+  map.set('Augenarzt', 0.01);
+  map.set('Fehleintragung', 0.09);
+  map.set('Arzt', 0.2);
+
+  const rand = Math.random();
+  let probSum = 0;
+
+  for (const [key, value] of map.entries()) {
+    probSum += value;
+    if (rand < probSum) {
+      console.log(key);
+      return key;
+    }
+  }
+  return '';
 };
